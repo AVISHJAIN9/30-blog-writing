@@ -1,0 +1,100 @@
+🚀 MERN Stack Blogging Platform - Backend Documentation
+This repository contains the industrial-standard backend for a full-stack blogging application. It is built using the MVC (Model-View-Controller) architecture to ensure scalability, security, and performance.
+
+🛠 Tech Stack
+Node.js & Express.js: Server-side runtime and framework.
+
+MongoDB & Mongoose: NoSQL database and Object Data Modeling (ODM).
+
+JWT (JSON Web Tokens): Secure user authentication.
+
+Bcrypt: Password hashing for data privacy.
+
+Cloudinary: Cloud-based image management for banners and profile pictures.
+
+Nanoid: For generating short, unique, and SEO-friendly URL slugs.
+
+📂 Project Architecture
+The project follows a modular structure to keep the code clean and maintainable.
+
+Plaintext
+backend/
+├── controllers/    # Business logic (Auth, Blog, User, Notification)
+├── middleware/     # Security gates (verifyJWT)
+├── models/         # Database schemas (User, Blog, Notification, Comment)
+├── routes/         # API endpoint definitions
+├── utils/          # Helper functions (Cloudinary upload)
+├── .env            # Private environment variables
+└── server.js       # Entry point of the application
+🔐 Core Features & Logic
+1. Authentication System
+We use a dual-layer security approach:
+
+Registration: Validates email/password and hashes the password using Bcrypt before saving to MongoDB.
+
+Login: Compares hashed passwords and generates a JWT that contains the user's unique ID.
+
+Access Control: A verifyJWT middleware intercepts requests to private routes, ensuring only logged-in users can post or comment.
+
+2. Blogging Engine
+Drafts vs. Published: Users can save progress as drafts. Validation only triggers when the draft flag is false.
+
+SEO Slugs: Titles are transformed into URL-friendly strings (e.g., "My First Blog" → my-first-blog-k3p91).
+
+Pagination: To handle high traffic, the server only sends 5 blogs at a time using .skip() and .limit().
+
+3. Engagement & Notifications
+Like Toggle: Atomic updates using $inc to prevent data races.
+
+Comment System: Supports parent-child relationships for nested replies.
+
+Automated Triggers: Notifications are automatically created for likes, comments, and replies.
+
+📡 API Endpoints
+Auth Routes (/api/auth)
+Method	Endpoint	Description	Access
+POST	/signup	Register a new user	Public
+POST	/signin	Login and receive JWT	Public
+Blog Routes (/api/blog)
+Method	Endpoint	Description	Access
+POST	/create-blog	Create a new post or draft	Private
+POST	/latest-blogs	Get recent posts (Paginated)	Public
+POST	/search-blogs	Search by title or tag	Public
+POST	/like-blog	Toggle like on a post	Private
+POST	/add-comment	Add comment or reply	Private
+User Routes (/api/user)
+Method	Endpoint	Description	Access
+POST	/get-profile	Fetch user info & their blogs	Public
+POST	/update-profile	Update bio & social links	Private
+⚙️ Setup & Installation
+Clone the project and enter the backend directory.
+
+Install dependencies:
+
+Bash
+npm install
+Configure Environment Variables: Create a .env file:
+
+Code snippet
+PORT=3000
+MONGO_URL=your_mongodb_connection_string
+JWT_SECRET=your_random_secret_string
+CLOUDINARY_NAME=your_name
+CLOUDINARY_API_KEY=your_key
+CLOUDINARY_API_SECRET=your_secret
+Run the server:
+
+Bash
+npm start
+🛡 Security Best Practices Implemented
+Password Hashing: Never storing plain-text passwords.
+
+JWT Stateless Auth: Secure sessions without slowing down the database.
+
+Regex Sanitization: Preventing malicious characters in URL slugs.
+
+CORS Protection: Restricting API access to trusted origins.
+
+Data Exclusion: Using .select("-password") to never leak sensitive data in API responses.
+
+This completes your Backend Documentation! Would you like me to create a "Frontend Checklist" for you next, so you know exactly which React components to build to match these API routes?

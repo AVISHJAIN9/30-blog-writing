@@ -1,0 +1,22 @@
+{
+  "name": "blog-platform-suite",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Full-stack MERN Blog Platform with 3D Canvas, Lenis Smooth Scroll, and GSAP Animations",
+  "scripts": {
+    "start:backend": "npm --prefix backend start",
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "build:frontend": "npm --prefix frontend run build"
+  },
+  "keywords": [
+    "blog",
+    "mern",
+    "react",
+    "express",
+    "mongodb",
+    "threejs",
+    "gsap"
+  ],
+  "license": "ISC"
+}
