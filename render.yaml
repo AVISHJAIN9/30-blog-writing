@@ -3,6 +3,7 @@ services:
     name: aj-blog-writing
     runtime: node
     plan: free
+    autoDeploy: true
     rootDir: BlogPlatform-Clean-Project/backend
     buildCommand: npm install
     startCommand: node server.js

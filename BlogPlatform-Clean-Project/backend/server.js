@@ -21,13 +21,15 @@ server.use(express.json()); // This allows the server to read the data from your
 server.use(cors());
 
 // 4. Database Connection
-mongoose.connect(process.env.MONGO_URL, {
+const mongoUri = process.env.MONGO_URL || process.env.MONGO_URI;
+mongoose.connect(mongoUri, {
     autoIndex: true,
 })
 .then(() => console.log("Connected to MongoDB ✅"))
 .catch(err => console.log("Database Connection Error ❌: ", err));
 
 // 5. Route Setup
+server.get('/health', (req, res) => res.json({ status: 'ok', service: 'Blog Platform API' }));
 server.get('/', (req, res) => res.json({ status: 'ok', service: 'Blog Platform API' }));
 server.use("/api/auth", authRoutes);
 server.use("/api/blog", blogRoutes);
