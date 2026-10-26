@@ -28,12 +28,13 @@ mongoose.connect(process.env.MONGO_URL, {
 .catch(err => console.log("Database Connection Error ❌: ", err));
 
 // 5. Route Setup
+server.get('/', (req, res) => res.json({ status: 'ok', service: 'Blog Platform API' }));
 server.use("/api/auth", authRoutes);
 server.use("/api/blog", blogRoutes);
 server.use("/api/user", userRoutes);
 server.use("/api/debug", debugRoutes);
 
 // 6. Start Listening
-server.listen(PORT, () => {
+server.listen(PORT, '0.0.0.0', () => {
     console.log('Server is running on port 🚀: ' + PORT);
 });
