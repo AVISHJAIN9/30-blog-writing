@@ -19,7 +19,7 @@ export default function Login() {
     setError('');
 
     try {
-      const { data } = await axios.post('http://localhost:3001/api/auth/signin', {
+      const { data } = await axios.post('https://aj-blog-writing.onrender.com/api/auth/signin', {
         email: email.trim().toLowerCase(),
         password,
       });

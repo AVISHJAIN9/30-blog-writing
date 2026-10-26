@@ -25,7 +25,7 @@ export default function Profile() {
       try {
         setLoading(true);
         const targetUsername = username || userAuth.username;
-        const { data } = await axios.post('http://localhost:3001/api/user/get-profile', {
+        const { data } = await axios.post('https://aj-blog-writing.onrender.com/api/user/get-profile', {
           username: targetUsername,
         });
         setProfile(data.user);
@@ -49,7 +49,7 @@ export default function Profile() {
 
     try {
       await axios.post(
-        'http://localhost:3001/api/user/update-profile',
+        'https://aj-blog-writing.onrender.com/api/user/update-profile',
         { bio },
         {
           headers: {

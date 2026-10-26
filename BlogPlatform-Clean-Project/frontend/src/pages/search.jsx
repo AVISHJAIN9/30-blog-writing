@@ -29,7 +29,7 @@ export default function Search() {
 
     try {
       setLoading(true);
-      const { data } = await axios.post('http://localhost:3001/api/blog/search-blogs', {
+      const { data } = await axios.post('https://aj-blog-writing.onrender.com/api/blog/search-blogs', {
         query: searchQuery,
         tag: selectedTag,
         page: newPage,
@@ -50,7 +50,7 @@ export default function Search() {
     setSearchQuery('');
     try {
       setLoading(true);
-      const { data } = await axios.post('http://localhost:3001/api/blog/search-blogs', {
+      const { data } = await axios.post('https://aj-blog-writing.onrender.com/api/blog/search-blogs', {
         tag,
         page: 1,
       });

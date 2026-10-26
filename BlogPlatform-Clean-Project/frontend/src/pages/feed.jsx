@@ -14,7 +14,7 @@ export default function Feed() {
     const fetchBlogs = async () => {
       try {
         setLoading(true);
-        const { data } = await axios.post('http://localhost:3001/api/blog/latest-blogs', {
+        const { data } = await axios.post('https://aj-blog-writing.onrender.com/api/blog/latest-blogs', {
           page,
         });
         setBlogs(data.blogs || []);

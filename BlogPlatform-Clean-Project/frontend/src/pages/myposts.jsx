@@ -22,7 +22,7 @@ export default function MyPosts() {
         setLoading(true);
         // Fetch user profile with their blogs
         const { data } = await axios.post(
-          'http://localhost:3001/api/user/get-profile',
+          'https://aj-blog-writing.onrender.com/api/user/get-profile',
           {
             username: userAuth.username,
           },

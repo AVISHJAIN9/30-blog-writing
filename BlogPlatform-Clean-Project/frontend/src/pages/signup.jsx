@@ -48,7 +48,7 @@ export default function Signup() {
     }
 
     try {
-      const { data } = await axios.post('http://localhost:3001/api/auth/signup', {
+      const { data } = await axios.post('https://aj-blog-writing.onrender.com/api/auth/signup', {
         fullname: fullname.trim(),
         email: email.trim().toLowerCase(),
         password,

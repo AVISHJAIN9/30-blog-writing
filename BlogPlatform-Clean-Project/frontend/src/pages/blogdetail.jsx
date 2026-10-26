@@ -23,7 +23,7 @@ export default function BlogDetail() {
       try {
         setLoading(true);
         const { data } = await axios.post(
-          'http://localhost:3001/api/blog/get-blog',
+          'https://aj-blog-writing.onrender.com/api/blog/get-blog',
           { blog_id: id }
         );
         setBlog(data);
@@ -47,7 +47,7 @@ export default function BlogDetail() {
 
     try {
       const { data } = await axios.post(
-        'http://localhost:3001/api/blog/like-blog',
+        'https://aj-blog-writing.onrender.com/api/blog/like-blog',
         { 
           _id: blog._id,
           isLikedByUser: isLiked
@@ -80,7 +80,7 @@ export default function BlogDetail() {
     try {
       setCommentLoading(true);
       await axios.post(
-        'http://localhost:3001/api/blog/add-comment',
+        'https://aj-blog-writing.onrender.com/api/blog/add-comment',
         { 
           _id: blog._id,
           comment: newComment,
@@ -96,7 +96,7 @@ export default function BlogDetail() {
       
       // Refresh blog to show new comment
       const { data } = await axios.post(
-        'http://localhost:3001/api/blog/get-blog',
+        'https://aj-blog-writing.onrender.com/api/blog/get-blog',
         { blog_id: id }
       );
       setComments(data.comments || []);

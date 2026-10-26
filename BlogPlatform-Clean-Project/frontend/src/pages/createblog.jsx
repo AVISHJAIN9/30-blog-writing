@@ -37,7 +37,7 @@ export default function CreateBlog() {
 
     try {
       const { data } = await axios.post(
-        'http://localhost:3001/api/blog/create-blog',
+        'https://aj-blog-writing.onrender.com/api/blog/create-blog',
         {
           title,
           des,
