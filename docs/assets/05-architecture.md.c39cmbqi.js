@@ -1,0 +1,28 @@
+import{_ as a,o as e,c as i,a2 as n}from"./chunks/framework.cT4_XGNl.js";const E=JSON.parse('{"title":"System Architecture & Request Lifecycle","description":"","frontmatter":{},"headers":[],"relativePath":"05-architecture.md","filePath":"05-architecture.md"}'),t={name:"05-architecture.md"};function l(r,s,p,h,c,o){return e(),i("div",null,[...s[0]||(s[0]=[n(`<h1 id="system-architecture-request-lifecycle" tabindex="-1">System Architecture &amp; Request Lifecycle <a class="header-anchor" href="#system-architecture-request-lifecycle" aria-label="Permalink to &quot;System Architecture &amp; Request Lifecycle&quot;">​</a></h1><h2 id="high-level-architecture" tabindex="-1">High-Level Architecture <a class="header-anchor" href="#high-level-architecture" aria-label="Permalink to &quot;High-Level Architecture&quot;">​</a></h2><p>The application is structured as a decoupled, multi-tier Single Page Application (SPA) communicating with a stateless Node.js / Express REST API backed by MongoDB Atlas and Cloudinary Media CDN.</p><div class="language-mermaid vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang">mermaid</span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">flowchart TD</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    subgraph ClientTier [Client Presentation Layer]</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">        Browser[Reader / Author Device]</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">        ViteSPA[React 19 Vite SPA]</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">        Browser --&gt; ViteSPA</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">        ViteSPA --&gt; R3F[Three.js Spatial Viewport]</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">        ViteSPA --&gt; LenisScroll[Lenis Smooth Scroll Pipeline]</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    end</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    subgraph EdgeTier [Edge CDN &amp; Caching]</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">        Cloudflare[Cloudflare Edge DNS / SSL]</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">        CloudinaryCDN[Cloudinary Media CDN]</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    end</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    subgraph ServiceTier [Stateless Application Cluster]</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">        ExpressAPI[Express.js Node API Server]</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">        JWTAuth[JWT Middleware Interceptor]</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    end</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    subgraph DataTier [Storage Layer]</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">        MongoCluster[(MongoDB Atlas Primary + Replicas)]</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    end</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    ViteSPA --&gt;|Static Media Requests| CloudinaryCDN</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    ViteSPA --&gt;|API Requests| Cloudflare</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    Cloudflare --&gt; ExpressAPI</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    ExpressAPI --&gt; JWTAuth</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    JWTAuth --&gt; MongoCluster</span></span></code></pre></div><h2 id="scaling-to-100x-load-the-first-three-bottlenecks" tabindex="-1">Scaling to 100x Load: The First Three Bottlenecks <a class="header-anchor" href="#scaling-to-100x-load-the-first-three-bottlenecks" aria-label="Permalink to &quot;Scaling to 100x Load: The First Three Bottlenecks&quot;">​</a></h2><ol><li><strong>MongoDB Query Contention on Blog Feeds</strong>: High read volume on <code>/api/v1/blogs</code> will bottleneck the database. <em>Mitigation</em>: Introduce Redis caching with cache-aside pattern and 60-second TTL.</li><li><strong>Node.js Single-Threaded CPU Saturation on Password Hashing</strong>: <code>bcrypt</code> CPU work during traffic spikes can block the event loop. <em>Mitigation</em>: Offload auth processing to dedicated worker threads or an external auth gateway.</li><li><strong>Heavy WebGL Canvas Initialization on Low-Power Mobile Devices</strong>: High draw calls degrade mobile battery. <em>Mitigation</em>: Add device capability detection (<code>navigator.hardwareConcurrency</code>) to automatically disable 3D canvas on low-end hardware.</li></ol>`,6)])])}const k=a(t,[["render",l]]);export{E as __pageData,k as default};
