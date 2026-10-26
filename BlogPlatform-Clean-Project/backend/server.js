@@ -1,3 +1,6 @@
+import buffer from 'buffer';
+if (!buffer.SlowBuffer) { buffer.SlowBuffer = { prototype: {} }; }
+if (typeof global.SlowBuffer === 'undefined') { global.SlowBuffer = buffer.SlowBuffer; }
 import express from 'express';
 import mongoose from 'mongoose';
 import 'dotenv/config';

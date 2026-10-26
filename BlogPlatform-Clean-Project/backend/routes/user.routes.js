@@ -1,6 +1,6 @@
 import express from 'express';
 import { getProfile, updateProfile } from '../controllers/user.controller.js';
-import verifyJWT from '../middleware/verifyJWT.js';
+import verifyJWT from '../middleware/verifyjwt.js';
 
 const router = express.Router();
 

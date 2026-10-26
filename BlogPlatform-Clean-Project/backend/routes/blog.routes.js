@@ -7,7 +7,7 @@ import {
     likeBlog, 
     addComment 
 } from '../controllers/blog.controller.js'; 
-import verifyJWT from '../middleware/verifyJWT.js'; 
+import verifyJWT from '../middleware/verifyjwt.js'; 
 
 const router = express.Router();
 
